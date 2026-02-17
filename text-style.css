@@ -1,0 +1,140 @@
+ 
+.heading {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'IrvingHeadingPro', serif;
+    color: rgb(25, 25, 221);
+    text-align: center;
+     
+}
+
+.mottoo {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(221, 25, 25);
+    text-align: center;
+    margin-bottom: 5px; 
+}
+
+.meaning-of-selflove {
+    font-size: 18px;
+    color: #5b376c;
+    margin-top: 5px;
+    font-family: 'century gothic', sans-serif;
+     text-align: justify;
+}
+
+.instagram {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(195, 32, 116);
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 5px;
+    font-style: italic;
+
+}
+    .instagram:hover {
+        background-color: rgb(165, 198, 33);
+        color: rgb(255, 255, 255);
+        transition: background-color 0.5s;
+}
+
+  .arabic-noir {
+        font-size: 40px;
+        color: #5b376c;
+        margin-top: 20px; 
+        margin-bottom: 18px; 
+    width: 800px;
+
+        font-family: Arial;
+        line-height: 20px;
+        text-align: justify;
+       
+    }
+
+
+
+
+
+.status{
+    color:gray;
+    margin-top: 1px;
+    margin-bottom: 1px;
+     
+}
+
+.author {
+    font-size: 18px;
+    color: #5b376c;
+    margin-top: 1px;
+margin-bottom: 1px;
+    font-family: 'century gothic', sans-serif;}
+
+      
+.date {
+    font-size: 18px;
+    color: #5b376c;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    font-family: 'century gothic', sans-serif;
+}
+
+.duolinguo-stuff {
+    font-size: 18px;
+    color: #000000;
+    margin-top: 1px;
+    font-family: 'century gothic', sans-serif;
+    line-height: 40px;
+    text-align: justify;
+    }
+
+    .office {    font-size: 18px;
+    color: #f7f7f7;
+    margin-top: 1px;
+    padding: 10px;
+    background-color: rgb(0, 0, 0);
+    font-family: 'century gothic', sans-serif;
+    line-height: 40px;
+    text-align: center;
+    }
+
+    .more {
+        margin-left: 18px;
+    }
+
+    .more:hover{
+        text-decoration: underline;
+        cursor: pointer;
+        
+    }
+p {text-align: center;}
+
+    .new{
+        color: rgb(19, 190, 19);
+         margin-bottom: 0px;
+    }
+
+    .product-name{
+        font-size: 58px;
+       margin-top: 0px;
+        margin-bottom: 40px;
+        
+    }
+
+    .finance-detail{
+        background-color: rgba(142, 53, 226, 0.838);
+        color:white;
+        padding: 20px;
+        font-size: 22px;
+  
+
+}
+    }
