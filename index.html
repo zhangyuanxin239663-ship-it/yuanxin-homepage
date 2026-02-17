@@ -1,107 +1,491 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>el sitio de Yuanxin · cuaderno vivo</title>
+    <!-- Fonts for editorial aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f9f7f4;
+            font-family: 'Source Serif 4', 'Times New Roman', serif;
+            color: #232323;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .main-wrapper {
+            max-width: 1000px;
+            width: 100%;
+        }
+        /* header */
+        .site-header {
+            border-bottom: 2px solid #c8c1b7;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .site-title {
+            font-family: 'Libre Bodoni', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #1e2c3a;
+            line-height: 1.1;
+            text-transform: lowercase;
+            margin-bottom: 0.25rem;
+        }
+        .site-title span {
+            font-style: italic;
+            font-weight: 400;
+            color: #6f5e4d;
+        }
+        .home-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #a3480b;
+            border-left: 3px solid #a3480b;
+            padding-left: 0.75rem;
+            margin-top: 0.3rem;
+        }
+        .home-tag a {
+            color: #a3480b;
+            text-decoration: none;
+            border-bottom: 1px dotted #a3480b;
+        }
 
-<title >el sitio de Yuanxin</title>
-<p class="heading">el sitio de Yuanxin</p>
-<link rel="stylesheet" href="styles/buttons.css">
-<link rel="stylesheet" href="styles/text-style.css">
+        /* three distinct lines for the three headline buttons */
+        .button-panel-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            margin: 3rem 0 2.5rem 0;
+            border-top: 1px solid #dad3cb;
+            padding-top: 2.2rem;
+        }
+        .headline-btn {
+            background: none;
+            border: none;
+            font-family: 'Libre Bodoni', serif;
+            font-size: 3.2rem;
+            font-weight: 600;
+            color: #3b3229;
+            cursor: pointer;
+            padding: 0.1rem 0;
+            text-align: left;
+            text-transform: lowercase;
+            letter-spacing: -0.01em;
+            border-bottom: 2px dotted transparent;
+            line-height: 1.2;
+            transition: color 0.15s, border-color 0.15s;
+            width: fit-content;
+        }
+        .headline-btn:hover {
+            color: #a3480b;
+            border-bottom: 2px dotted #a3480b;
+        }
+
+        /* entrada panel (editable) */
+        .entry-editor {
+            background-color: #f4efe9;
+            border: 1px solid #ddd2c5;
+            padding: 2rem;
+            margin: 2rem 0 3rem 0;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.04);
+        }
+        .editor-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .editor-field {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.95rem;
+        }
+        .editor-field label {
+            color: #3e3a35;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .editor-field input, .editor-field select, .editor-field textarea {
+            background: white;
+            border: 1px solid #cbbcaa;
+            padding: 0.5rem 0.8rem;
+            font-family: 'Source Serif 4', serif;
+            font-size: 1rem;
+            color: #2b241e;
+            border-radius: 0;
+        }
+        .editor-field input:focus, .editor-field select:focus, .editor-field textarea:focus {
+            outline: 2px solid #a3480b55;
+            border-color: #a3480b;
+        }
+        .editor-field textarea {
+            min-width: 300px;
+            resize: vertical;
+        }
+        .btn-save {
+            background: none;
+            border: 2px solid #3b3229;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1rem;
+            padding: 0.6rem 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #3b3229;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.1s;
+        }
+        .btn-save:hover {
+            background: #3b3229;
+            color: #f9f7f4;
+            border-color: #3b3229;
+        }
+
+        /* feed / entries */
+        .entries-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            margin-top: 1.5rem;
+        }
+        .feed-card {
+            background-color: #ffffffec;
+            border: 1px solid #e3dcd3;
+            padding: 1.8rem 2rem 1.5rem 2rem;
+            box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.02);
+            position: relative;
+        }
+        .feed-card-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 1rem 2rem;
+            border-bottom: 1px dashed #cfc4b8;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .feed-section-tag {
+            font-family: 'Libre Bodoni', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #2b3f4b;
+            letter-spacing: -0.01em;
+        }
+        .feed-date {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            background: #e5ddd3;
+            padding: 0.2rem 1rem;
+            color: #1f2a30;
+            text-transform: uppercase;
+        }
+        .feed-thought {
+            font-size: 1.2rem;
+            color: #2f2a24;
+            padding-left: 0.8rem;
+            border-left: 3px solid #c6aa8f;
+            margin: 0.8rem 0 0.3rem 0;
+        }
+        .delete-btn {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.2rem;
+            color: #a8614b;
+            cursor: pointer;
+            opacity: 0.4;
+            transition: 0.1s;
+        }
+        .delete-btn:hover {
+            opacity: 1;
+            color: #b33f1f;
+        }
+        .colophon {
+            margin-top: 5rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: #9b9084;
+            border-top: 1px solid #dad3cb;
+            padding-top: 1.2rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .hr-light {
+            border: none;
+            border-top: 1px solid #e1d8cf;
+            margin: 1rem 0;
+        }
+        .info-note {
+            font-family: 'IBM Plex Mono', monospace;
+            background: #eae3db;
+            padding: 0.4rem 1rem;
+            color: #2d3a41;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
-
 <body>
+<div class="main-wrapper">
 
+    <!-- HEADER -->
+    <div class="site-header">
+        <div class="site-title">el sitio <span>de</span> Yuanxin</div>
+        <div class="home-tag">
+            📓 Documenting thoughts · <a href="https://www.instagram.com/yuanxinzhanggg/" target="_blank">Instagram</a>
+        </div>
+        
+    </div>
 
+    <!-- THREE BUTTONS in three distinct lines, as headlines -->
+    <div class="button-panel-vertical">
+        <button class="headline-btn" id="btnMusica" onclick="showSection('musica')">🎵 La Musica</button>
+        <button class="headline-btn" id="btnIdiomas" onclick="showSection('idiomas')">🔤 Las Idiomas</button>
+        <button class="headline-btn" id="btnPelis" onclick="showSection('peliculas')">🎬 Las Películas / Series</button>
+    </div>
 
-<a class="instagram" href="https://www.instagram.com/yuanxinzhanggg/" 
-target="_blank">
-    Instagram</a>
+    <!-- HOME MESSAGE (visible when no section selected) -->
+    <div id="homeMessage" style="display: block; margin: 0.5rem 0 2rem 0; border-left: 3px solid #cdb9a8; padding-left: 1.5rem; font-family: 'IBM Plex Mono', monospace; color: #4a3f35;">
+        <p>selecciona una sección · cada botón abre libreta de apuntes · abajo puedes añadir entradas nuevas ✎</p>
+        <p style="margin-top: 0.5rem; font-style: italic;">"la música, las lenguas, las historias que miro"</p>
+    </div>
 
+    <!-- DYNAMIC SECTION CONTAINERS (only one visible at a time) -->
+    <!-- each container holds: editor form + feed of existing entries (specific to section) -->
+    <div id="musica" class="section-examples" style="display: none;">
+        <div class="entry-editor" data-section="musica">
+            <div class="editor-row">
+                <div class="editor-field">
+                    <label>📅 fecha</label>
+                    <input type="date" id="fechaMusica" value="2026-02-17">
+                </div>
+                <div class="editor-field" style="flex-grow:2;">
+                    <label>🎵 pensamiento</label>
+                    <textarea id="textoMusica" rows="2" placeholder="ej. hoy escuché... (escribe algo sobre música)"></textarea>
+                </div>
+                <button class="btn-save" onclick="guardarEntrada('musica')">guardar</button>
+            </div>
+        </div>
+        <div id="feedMusica" class="entries-feed"></div>
+        <div class="back-link"><a href="#" onclick="hideAllSections(); return false;">← volver al inicio</a></div>
+    </div>
 
-<p class="mottoo">Love yourself</p>
-<p class="meaning-of-selflove">Which means thinking about the things that makes me unique and special.
-    I know a lot of culturals, I've been to a lot of places, and i know a lot of languages.
-    I speak good english.
-    i am culturally aware, 
-    and i have a lot of Apple products, and i just need some time, then i'll accomplish things.
-    Now i just need to focus to learn things.
-</p>
+    <div id="idiomas" class="section-examples" style="display: none;">
+        <div class="entry-editor" data-section="idiomas">
+            <div class="editor-row">
+                <div class="editor-field">
+                    <label>📅 fecha</label>
+                    <input type="date" id="fechaIdiomas" value="2026-02-17">
+                </div>
+                <div class="editor-field" style="flex-grow:2;">
+                    <label>🔤 pensamiento</label>
+                    <textarea id="textoIdiomas" rows="2" placeholder="ej. hoy aprendí en árabe..."></textarea>
+                </div>
+                <button class="btn-save" onclick="guardarEntrada('idiomas')">guardar</button>
+            </div>
+        </div>
+        <div id="feedIdiomas" class="entries-feed"></div>
+        <div class="back-link"><a href="#" onclick="hideAllSections(); return false;">← volver al inicio</a></div>
+    </div>
 
-<button class="la-musica">La Musica</button>
-<p> </p>
+    <div id="peliculas" class="section-examples" style="display: none;">
+        <div class="entry-editor" data-section="peliculas">
+            <div class="editor-row">
+                <div class="editor-field">
+                    <label>📅 fecha</label>
+                    <input type="date" id="fechaPelis" value="2026-02-17">
+                </div>
+                <div class="editor-field" style="flex-grow:2;">
+                    <label>🎬 pensamiento</label>
+                    <textarea id="textoPelis" rows="2" placeholder="ej. segundo episodio de The Office..."></textarea>
+                </div>
+                <button class="btn-save" onclick="guardarEntrada('peliculas')">guardar</button>
+            </div>
+        </div>
+        <div id="feedPeliculas" class="entries-feed"></div>
+        <div class="back-link"><a href="#" onclick="hideAllSections(); return false;">← volver al inicio</a></div>
+    </div>
 
-<button class="las-idiomas">Las Idiomas</button>
+    <!-- footer -->
+    <div class="colophon">
+        el sito de Yuanxin · cuaderno de pensamientos · edición febrero 2026 · todas las entradas se guardan en tu navegador
+    </div>
+</div>
 
+<script>
+    (function() {
+        // ----- GLOBAL STATE: entries stored by section in localStorage -----
+        function loadEntries(section) {
+            try {
+                return JSON.parse(localStorage.getItem('yuanxin_' + section)) || [];
+            } catch { return []; }
+        }
+        function saveEntries(section, entries) {
+            localStorage.setItem('yuanxin_' + section, JSON.stringify(entries));
+        }
 
-<p class="arabic-noir">
-    Arabic Noir: Cool things about Arabic.
-</p>
+        // ----- helper to render feed for a section -----
+        function renderFeed(section) {
+            const container = document.getElementById(
+                section === 'musica' ? 'feedMusica' :
+                section === 'idiomas' ? 'feedIdiomas' : 'feedPeliculas'
+            );
+            if (!container) return;
+            const entries = loadEntries(section);
+            if (entries.length === 0) {
+                container.innerHTML = `<div class="info-note">✎ ninguna entrada aún. escribe algo arriba.</div>`;
+                return;
+            }
+            // sort by date descending (most recent first)
+            entries.sort((a,b) => (a.fecha < b.fecha ? 1 : -1));
+            let html = '';
+            entries.forEach((ent, index) => {
+                html += `
+                    <div class="feed-card" data-index="${index}">
+                        <button class="delete-btn" onclick="borrarEntrada('${section}', ${index})" title="borrar">✕</button>
+                        <div class="feed-card-header">
+                            <span class="feed-section-tag">${ section === 'musica' ? '♩' : section === 'idiomas' ? '✎' : '🎬' }</span>
+                            <span class="feed-date">${ent.fecha || 'fecha?'}</span>
+                        </div>
+                        <div class="feed-thought">${ent.texto.replace(/\n/g, '<br>')}</div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
 
-<p class="status">3.4M Views · Dos Semanas Antes</p>
+        // ----- guardar nueva entrada (llamada desde botón) -----
+        window.guardarEntrada = function(section) {
+            let fechaInput, textoInput;
+            if (section === 'musica') {
+                fechaInput = document.getElementById('fechaMusica');
+                textoInput = document.getElementById('textoMusica');
+            } else if (section === 'idiomas') {
+                fechaInput = document.getElementById('fechaIdiomas');
+                textoInput = document.getElementById('textoIdiomas');
+            } else {
+                fechaInput = document.getElementById('fechaPelis');
+                textoInput = document.getElementById('textoPelis');
+            }
+            if (!fechaInput || !textoInput) return;
+            const fecha = fechaInput.value;
+            let texto = textoInput.value.trim();
+            if (!texto) {
+                alert('escribe algo antes de guardar.');
+                return;
+            }
+            // opcional: si no hay fecha, poner hoy
+            const fechaReal = fecha || new Date().toISOString().slice(0,10);
+            const entries = loadEntries(section);
+            entries.push({ fecha: fechaReal, texto: texto });
+            saveEntries(section, entries);
+            // limpiar textarea
+            textoInput.value = '';
+            // re-render feed
+            renderFeed(section);
+        };
 
-<p class="author">
-    Yuanxin Zhang
-</p>
+        // ----- borrar entrada -----
+        window.borrarEntrada = function(section, index) {
+            const entries = loadEntries(section);
+            if (index >= 0 && index < entries.length) {
+                entries.splice(index, 1);
+                saveEntries(section, entries);
+                renderFeed(section);
+            }
+        };
 
-<p class="date">
-    Feb-14-2026 &#10003;
-</p>
+        // ----- mostrar/ocultar secciones (tabs) y renderizar feed al mostrar -----
+        window.hideAllSections = function() {
+            document.getElementById('musica').style.display = 'none';
+            document.getElementById('idiomas').style.display = 'none';
+            document.getElementById('peliculas').style.display = 'none';
+            document.getElementById('homeMessage').style.display = 'block';
+        };
 
-<p class="duolinguo-stuff">
-    
+        window.showSection = function(section) {
+            document.getElementById('musica').style.display = 'none';
+            document.getElementById('idiomas').style.display = 'none';
+            document.getElementById('peliculas').style.display = 'none';
+            document.getElementById('homeMessage').style.display = 'none';
+            const secDiv = document.getElementById(section);
+            secDiv.style.display = 'flex';  // because section-examples has flex column
+            // render feed
+            renderFeed(section);
+            // small scroll
+            setTimeout(() => secDiv.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+        };
 
-    In Duolinguo, sometimes, some Arabic letters,
-     the top or the bottom, is not visible. It's a bug, 
-     and sometimes i have to search online for the eaxct word,
-     but sometimes, i can't even find it.
-     i think i need to report it to them, 
-    and hopefully, they
-     can notice it.
-     i never know when i report a mistake
-     in duolinguo, 
-     do they really have 
-     somebody to check or not.
-    
-</p>
+        // botones headline
+        document.getElementById('btnMusica').addEventListener('click', (e) => { e.preventDefault(); showSection('musica'); });
+        document.getElementById('btnIdiomas').addEventListener('click', (e) => { e.preventDefault(); showSection('idiomas'); });
+        document.getElementById('btnPelis').addEventListener('click', (e) => { e.preventDefault(); showSection('peliculas'); });
 
+        // back links (volver al inicio)
+        document.querySelectorAll('.back-link a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                hideAllSections();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
 
-
-
-<button class="movies">Las Películas / Series</button>
-
-<p class="office">
-    <strong>Office </strong> : the show that makes you angry.
-     <span class="more">More&#62;</span>
-</p>
-
-<button class="shop">SHOP</button>
-<p>
-    <span class="new">New </span><br>
-    <span class="product-name"></span>Ipad Pro - 2025</span><br>
-    Super Thin and Aesthetic<br>
-    9,999 RMB<br>
-
-</p>
-
-
-
-
-<p></p>
-<button class="finance">Finance</button>
-
-<p class="finance-detail">
-資產概覽<br>
-日期&#58 2026年2月14日<br>
-我的資產 &#40元&#41  &#58 750.09<br>
-昨日收益&#58 +0.03<br>
-
-
-</p>
-
+        // al inicio: aseguramos home visible y feeds ocultos
+        window.onload = function() {
+            hideAllSections();
+            document.getElementById('homeMessage').style.display = 'block';
+            // pre-render vacío no necesario, pero podemos pre-cargar ejemplos para demostración
+            // (opcional: crear un par de entradas de ejemplo si no existe ninguna)
+            ['musica','idiomas','peliculas'].forEach(sec => {
+                const entries = loadEntries(sec);
+                if (entries.length === 0) {
+                    // añadir un par de ejemplos demostrativos (para que se vea el sistema)
+                    if (sec === 'peliculas') {
+                        saveEntries('peliculas', [
+                            { fecha: '2026-02-16', texto: 'The Office S5E2: Michael intenta hacer reír pero duele. Dwight aparece con un sombrero de papel.' },
+                            { fecha: '2026-02-15', texto: 'Tár: segunda vez. La escena del ensayo me golpea más fuerte. El sonido es una trampa.' }
+                        ]);
+                    } else if (sec === 'musica') {
+                        saveEntries('musica', [
+                            { fecha: '2026-02-14', texto: 'duduk armenio: prueba de microtonos. Me recuerda al viento en la montaña.' },
+                            { fecha: '2026-02-13', texto: 'Flamenco Sketches: cada repetición es un universo.' }
+                        ]);
+                    } else if (sec === 'idiomas') {
+                        saveEntries('idiomas', [
+                            { fecha: '2026-02-17', texto: 'Árabe: las letras solares se tragan la "l". Duolingo no muestra los diacríticos, confuso.' },
+                            { fecha: '2026-02-12', texto: 'Griego: ίσως vs μήπως. La duda sutil.' }
+                        ]);
+                    }
+                }
+            });
+        };
+    })();
+</script>
+<!-- tiny extra style for micro-note consistency (no effect) -->
 </body>
-
 </html>
-
-
-
- 
